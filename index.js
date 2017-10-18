@@ -310,7 +310,12 @@ sassLint.failOnError = function (results, options, configPath) {
       configOptions = this.getConfig(options, configPath).options;
 
   if (errorCount.count > 0) {
-    console.log(errorCount.count + ' errors were detected in \n- ' + errorCount.files.join('\n- '));
+    console.log( errorCount.count + ' errors were detected in \n- ' + errorCount.files.join('\n- '));
+    results.forEach(function (result){
+      result.messages.forEach(function (message){
+        console.log('\t' + message.line + ':' + message.column + ' ' + message.ruleId + ':' + message.message );
+      });
+    });
     //throw new exceptions.SassLintFailureError(errorCount.count + ' errors were detected in \n- ' + errorCount.files.join('\n- '));
   }
 
